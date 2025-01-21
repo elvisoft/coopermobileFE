@@ -3,7 +3,6 @@ import * as React from 'react';
 import * as Location from 'expo-location';
 import MapView, { LatLng, Marker, Polyline } from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
-import {GOOGLE_MAPS_KEY } from '@env';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import DefaultRoundedButton from '../../components/DefaultRoundedButton';
 import { StackScreenProps } from "@react-navigation/stack";
@@ -17,9 +16,10 @@ export default function DashboardScreen({navigation,route}:Props) {
         longitude:  -65.411597,
       });
     const [destination, setDestination] = React.useState({
-    latitude: -24.789229,
-    longitude: -65.411797,
+    latitude: -24.799429,
+    longitude: -65.421997,
     });
+    /*
     const [selectedPlace,setSelectedPlace]=React.useState<LatLng | undefined>(undefined);
     React.useEffect(() => {
         getLocationPermission();
@@ -38,9 +38,9 @@ export default function DashboardScreen({navigation,route}:Props) {
         }
         setOrigin(current);
     }
+    */
     return (
-        <View style={styles.container}>
-            <Text>Panel de control</Text>           
+        <View style={styles.container}>                     
             <MapView style={styles.map}
                 initialRegion={{
                     latitude: origin.latitude,
@@ -62,16 +62,13 @@ export default function DashboardScreen({navigation,route}:Props) {
                 <MapViewDirections
                 origin={origin}
                 destination={destination}
-                apikey={GOOGLE_MAPS_KEY}
+                apikey={'AIzaSyB8rvPU8esd4ibsbOE_MBblE7BFIaOehVQ'}
                 strokeColor="black"
                 strokeWidth={5}
                 />    
             </MapView>
-            <GooglePlacesAutocomplete placeholder='Recoger en' query={{key:GOOGLE_MAPS_KEY, language:'es'}}
-                onPress={(data,details=null)=>{
-                    console.log('Details ',details)
-                    setSelectedPlace(details?.location)
-                }}
+            <GooglePlacesAutocomplete placeholder='Recoger en' query={{key:'AIzaSyB8rvPU8esd4ibsbOE_MBblE7BFIaOehVQ', language:'es'}}
+                onPress={()=>{        }}
                 debounce={200} styles={{container: styles.placeautocomplete}}    >
                 
             </GooglePlacesAutocomplete>
