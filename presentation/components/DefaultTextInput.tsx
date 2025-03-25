@@ -6,7 +6,9 @@ interface Props {
     onChangeText: (text: string) => void,
     keyboardType?: KeyboardType,
     icon: any,
-    secureTextEntry?: boolean
+    secureTextEntry?: boolean,
+    textColor?: string,
+    placeholderTextColor?: string,
 }
 
 const DefaultTextInput = ({ 
@@ -15,7 +17,9 @@ const DefaultTextInput = ({
     onChangeText, 
     keyboardType = 'default',
     icon,
-    secureTextEntry = false
+    secureTextEntry = false,
+    textColor = 'black',
+    placeholderTextColor = 'grey'
 }: Props) => {
     return (
     <View style={styles.containerTextInput}>
@@ -26,9 +30,9 @@ const DefaultTextInput = ({
         />
 
         <TextInput 
-            style={styles.textInput}
+            style={{...styles.textInput, color: textColor}}
             placeholder={placeholder}
-            placeholderTextColor='white'
+            placeholderTextColor={placeholderTextColor}
             value={ value }
             onChangeText={ text => onChangeText(text) }
             keyboardType={ keyboardType }
@@ -48,9 +52,9 @@ const styles = StyleSheet.create({
       textInput: {
         width: '90%',
         height: 50,
-        borderBottomWidth: 1,
-        borderBottomColor: 'white',
-        color: 'white',
+        borderBottomWidth: 2,
+        borderBottomColor: 'grey',
+        color: 'black',
         fontSize: 18,
       },
       textInputIcon: {

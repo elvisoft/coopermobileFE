@@ -1,0 +1,13 @@
+import { AuthResponse } from "../../../../domain/models/AuthResponse";
+import { ErrorResponse } from "../../../../domain/models/ErrorResponse";
+import { LoginUseCase } from "../../../../domain/useCases/Auth/LoginUseCase";
+
+export class LoginViewModel {
+    private loginUseCase:LoginUseCase
+    constructor({loginUseCase}:{loginUseCase:LoginUseCase}){
+        this.loginUseCase=loginUseCase
+    }
+    async login(email:string,password:string){
+        return await this.loginUseCase.execute(email,password)
+    }
+}

@@ -5,6 +5,8 @@ import DefaultRoundedButton from "../../../components/DefaultRoundedButton";
 import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "../../../navigator/MainStackNavigator";
 import { useState } from "react";
+import { container } from "../../../../di/container";
+import { RegisterViewModel } from "./RegisterViewModel";
 interface Props extends StackScreenProps<RootStackParamList,'RegisterScreen'>{};
 export default function RegisterScreen({navigation,route}:Props) {
     const [name, setName] = useState('');
@@ -14,6 +16,32 @@ export default function RegisterScreen({navigation,route}:Props) {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
 
+    const registerViewModel:RegisterViewModel=container.resolve('registerViewModel')
+
+    const handleRegister=async()=>{
+        if(email=='' || password==''){
+            alert('El email y la contraseña son requeridos!');
+            return;
+        }
+        if(name=='' || lastname==''){
+            alert('El nombre y el apellido son requeridos!');
+            return;
+        }
+        if(confirmPassword!==password){
+            alert('Las contraseñas no coinciden!');
+            return;
+        }
+       const response=await registerViewModel.register({
+            name:name,
+            lastname:lastname,
+            email:email,
+            password:password,
+            phone:phone
+       });
+       console.log('Response ',response)
+       //await login(email, password)
+    }
+    
     return (
         <View style={styles.container}>
             <Image
@@ -70,7 +98,7 @@ export default function RegisterScreen({navigation,route}:Props) {
                 <DefaultRoundedButton 
                     text="Registrarse"
                     backgroundColor="black"
-                    onPress={()=>{}}
+                    onPress={() => handleRegister()}
                 />
             </View>
         </View>

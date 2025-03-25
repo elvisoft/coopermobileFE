@@ -24,10 +24,10 @@ const styles=StyleSheet.create({
         paddingHorizontal: 25
       },
       imageUser: {
-        width: 250,
-        height: 250,
+        width: 100,
+        height: 100,
         alignSelf: 'center',
-        marginBottom: 15
+        marginBottom: 5
       },
       textLogin: {
         color: 'black',
@@ -51,6 +51,30 @@ const styles=StyleSheet.create({
         width: 87,
         backgroundColor: 'grey',
         marginHorizontal: 5
+      },
+      perfilbg:{
+        marginTop:8,
+        marginBottom:8,
+        backgroundColor: 'rgba(234, 126, 120, 0.2)',
+        borderRadius: 20,
+        justifyContent: 'center',
+        paddingHorizontal: 15,
+        padding:15
+      },
+      txtred:{
+        color:'red'
+      },
+      txtwhite:{
+        color:'white'
+      },
+      buton: {
+        marginTop:5,
+        padding:5,        
+        backgroundColor:'orange',
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 20,
+        color:'white'
       }
 });
 export default styles;

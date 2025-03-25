@@ -1,44 +1,52 @@
-import { StyleSheet, Text, View, Image, TextInput, Button, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Image, TextInput, Button, TouchableOpacity, Alert } from 'react-native';
 import DefaultTextInput from '../../../components/DefaultTextInput';
 import DefaultRoundedButton from '../../../components/DefaultRoundedButton';
 import { StackScreenProps } from '@react-navigation/stack';
 import { RootStackParamList } from '../../../navigator/MainStackNavigator';
 import styles from './Styles';
 import * as React from 'react';
+import { ApiRequestHandler } from '../../../../data/resources/remote/api/ApiRequestHandler';
+import { AuthResponse } from '../../../../domain/models/AuthResponse';
+import { defaultErrorResponse, ErrorResponse } from '../../../../domain/models/ErrorResponse';
+import { container } from '../../../../di/container';
 interface Props extends StackScreenProps<RootStackParamList, 'LoginScreen'>{};
 
 export default function LoginScreen({ navigation, route }: Props) {
     const [email,setemail]=React.useState('')
     const [password,setpassword]=React.useState('')
-
+    const loginViewModel=container.resolve('loginViewModel');
     
-    function verifiEntry(email:string, password:string) {
+    function verifiEntry() {
         if(email=='user1@gmail.com' && password=='12345678'){
-            navigation.navigate('DashboardScreen')
+            navigation.navigate('ClientSearchMapScreen')
         }
         else if(email=='' || password=='')
             alert('El email y la contraseña son requeridos!')
         else alert('La contraseña y el email no estan registrados!')    
     } 
-
+    const handleLogin=async()=>{
+        if(email=='' || password==''){
+            Alert.alert('Error!!!','El email y la contraseña son requeridos!');
+            return;
+        }
+       const response = await loginViewModel.login(email,password);
+       console.log('Response ',response)
+       //await login(email, password)
+    }
+   
     return (
         <View style={styles.container}>
 
-            <Image
-                style={styles.imageBackground}
-                source={require('../../../../assets/saltacity1.jpg')}
-            />
-
+         
             <View style={styles.form}>
             <Text style={styles.textLogin}>Bienvenido a Cooper</Text>
                 <Image
-                    source={require('../../../../assets/user.png')}
+                    source={require('../../../../assets/logocooper2.png')}
                     style={styles.imageUser}
-                />
-                <Text style={styles.textLogin}>LOGIN</Text>
+                />              
 
                 <DefaultTextInput
-                    icon={require('../../../../assets/email.png')}
+                    icon={require('../../../../assets/email1.png')}
                     placeholder='Correo electronico'
                     onChangeText={setemail}
                     value={email}
@@ -46,7 +54,7 @@ export default function LoginScreen({ navigation, route }: Props) {
                 />
 
                 <DefaultTextInput
-                    icon={require('../../../../assets/password.png')}
+                    icon={require('../../../../assets/pass1.png')}
                     placeholder='Contraseña'
                     onChangeText={setpassword}
                     value={password}
@@ -55,7 +63,8 @@ export default function LoginScreen({ navigation, route }: Props) {
 
                 <DefaultRoundedButton
                     text='INICIAR SESION'
-                    onPress={() => verifiEntry(email,password)}                    
+                    onPress={() => verifiEntry()}  
+                    backgroundColor='#ff7b25'                  
                 />
 
                 <View style={styles.containerTextDontHaveAccount}>
@@ -67,9 +76,10 @@ export default function LoginScreen({ navigation, route }: Props) {
 
                 <DefaultRoundedButton
                     text='REGISTRATE'
-                    onPress={() => navigation.navigate('RegisterScreen')}
-                    backgroundColor='black'
+                    onPress={() => navigation.navigate('PerfilChoferScreen')}
+                    backgroundColor='#034f84'
                 />
+              
 
             </View>
 
