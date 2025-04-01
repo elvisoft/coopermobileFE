@@ -17,7 +17,7 @@
         "NSLocationWhenInUseUsageDescription": "Esta app utiliza tu ubicacion para mostrarte tu posicion en el mapa"
       },
       "config": {
-        "googleMapsApiKey": "AIzaSyB8rvPU8esd4ibsbOE_MBblE7BFIaOehVQ"
+       
       }
     },
     "android": {
@@ -31,9 +31,7 @@
         "ACCESS_BACKGROUND_LOCATION"
       ],
       "config":{
-        "googleMaps": {
-          "apiKey": "AIzaSyB8rvPU8esd4ibsbOE_MBblE7BFIaOehVQ"
-        }
+       
       },
       "package": "com.elvisoft.InDriverReactNative"
     },
@@ -44,7 +42,7 @@
       "eas": {
         "projectId": "dbcb405d-50cd-497e-8ec7-0ed8c1254673"
       },
-      "googleMapsApiKey": "AIzaSyB8rvPU8esd4ibsbOE_MBblE7BFIaOehVQ"
+     
     }
   }
 }
